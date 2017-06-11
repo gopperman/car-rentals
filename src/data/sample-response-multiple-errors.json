@@ -1,0 +1,14 @@
+{
+  "Errors": [
+    {
+      "ErrorCode": "100024",
+      "ErrorMessage": "'startdate' should occur before 'enddate'"
+    },
+    {
+      "ErrorCode": "100022",
+      "ErrorMessage": "travel dates are too far in the future"
+    }
+  ],
+  "StatusCode": "3",
+  "StatusDesc": "validation error"
+}

@@ -1,0 +1,10 @@
+{
+  "Errors": {
+    "Error": {
+      "ErrorCode": "100001",
+      "ErrorMessage": "'startdate' should be in format mm/dd/yyyy"
+    }
+  },
+  "StatusCode": "3",
+  "StatusDesc": "validation error"
+}
