@@ -3,11 +3,6 @@
 $module-name: 'car';
 
 .#{$module-name} {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: row;
-
 	margin: 0;
 	padding: 20px 0;
 
@@ -19,23 +14,99 @@ $module-name: 'car';
 		background: $gray-light;
 	}
 
-	&__links {}
+	&__type {
+		margin: 0;
+	}
+
+	&__pricing {
+		text-align: right;
+	}
+
+	&__subtotal, &__fees {
+		color: $gray;
+		margin: .5em 0;
+	}
+
+	&__total-price {
+		border-top: 1px solid $black;
+		color: $black;
+		font-weight: bold;
+		margin-top: 0;
+		padding: .5em 0;
+	}
+
+	&__rate {
+		color: $gray;
+		margin: .5em 0;
+	}
 
 	&__cta {
 		background: $green;
+		border-radius: 4px;
 		color: white;
+		font-size: $font-md;
 		display: inline-block;
-		padding: 8px 32px;
+		margin-bottom: 2em;
+		padding: 8px 24px;
+		text-align: center;
 		text-decoration: none;
+		transition: background, .2s;
+		&:active, &:hover, &:focus {
+			background: lighten($green, 10%);
+		}
 	}
+
 	&__more {
-		height: 0;
+		max-height: 0;
 		overflow: hidden;
+		padding: 0 20px;
+		transition: max-height, .2s;
+
+		&--expanded {
+			max-height: 9999px;
+		}
+
+		&-toggle {
+			border: 0;
+			background: transparent;
+			color: $gray;
+			float: right;
+			font-size: $font-sm;
+			margin-right: 10px;
+
+			&:hover {
+				cursor: hand;
+				cursor: pointer;
+				text-decoration: underline;
+			}
+
+			&:after {
+				content: " ▼";
+			}
+
+			&--expanded {
+				&:after {
+					content: " ▲";
+				}
+			}
+		}
 	}
 
 	&__flex {
-   		width: 25%;
-   		margin: 0 20px;
-   		flex-grow: 1 0 0 0;
+		display: flex;
+		justify-content: flex-start;
+		flex-direction: column;
+   		min-width: 25%;
+   		min-height: 100%;
+   		padding: 0 10px;
+   		flex: 1;
+   		flex-grow: 1;
+
+   		&-container {
+   			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+			flex-direction: row;
+   		}
 	}
 }
