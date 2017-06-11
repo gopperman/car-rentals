@@ -27,4 +27,5 @@ class ErrorMessage extends Component {
 ErrorMessage.propTypes = {
 	errors: PropTypes.array.isRequired,
 }
+
 export default ErrorMessage

@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
+import _ from 'lodash'
 import {getErrors} from './util/dataUtil.js'
 // #TECHDEBT We should really just import the parts of lodash we need
 import Header from './components/Header'
-import ErrorMessage from './components/ErrorMessage' 
+import ErrorMessage from './components/ErrorMessage'
+import Results from './components/Results'
 
 import './App.css'
 
-import data from './data/sample-response-invalid-input.json'
+import data from './data/sample-response.json'
 
 class App extends Component {
 	constructor() {
@@ -31,11 +33,15 @@ class App extends Component {
 	 */
 	showResults() {
 		const errors = getErrors(this.state.response)
+		const cars = _.get(this.state.response, 'Result', null)
 		/**
-		 * If we have one or more errors, render error messaging
+		 * If we have one or more errors, render error messaging.
 		 * Otherwise, show results!
 		 */
-		return (errors.length > 0) ? (<ErrorMessage errors={errors} />) : (<p>Results</p>)
+		return (errors.length > 0) ? 
+			<ErrorMessage errors={errors} /> 
+		:
+			<Results cars={cars} dest={this.state.query.dest} />
 
 	}
 

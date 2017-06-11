@@ -1,0 +1,13 @@
+@import './variables.scss';
+
+$module-name: 'results';
+
+.#{$module-name} {
+	border: 2px solid $black;
+	max-width: 800px;
+	margin: 20px auto;
+
+	&__hed {
+		margin: 20px;
+	}
+}
