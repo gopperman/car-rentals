@@ -1,7 +1,10 @@
-import React, { Component } from 'react';
-import Header from './components/Header' 
-import './App.css';
-import data from './data/sample-response.json'
+import React, { Component } from 'react'
+// #TECHDEBT We should really just import the parts of lodash we need
+import _ from 'lodash' 
+import Header from './components/Header'
+import ErrorMessage from './components/ErrorMessage' 
+import './App.css'
+import data from './data/sample-response-multiple-errors.json'
 
 class App extends Component {
 	constructor() {
@@ -19,9 +22,27 @@ class App extends Component {
 			}
     	}
 	}
+	/**
+	 * Renders components conditionally based on the response body
+	 * 
+	 * @return {Component} the component(s) to render
+	 */
+	showResults() {
+		const errors = _.get(this.state, 'response.Errors', [])
+		/**
+		 * If we have one or more errors, render error messaging
+		 * Otherwise, show results!
+		 */
+		return (errors.length > 0) ? (<ErrorMessage errors={errors} />) : (<p>Results</p>)
+
+	}
+
 	render() {
 		return (
-			<Header />
+			<main className="App">
+				<Header />
+				{this.showResults()}
+			</main>
 		)
 	}
 }

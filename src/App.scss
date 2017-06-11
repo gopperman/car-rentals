@@ -1,8 +1,9 @@
 @import './styles/variables.scss';
 @import './styles/header.scss';
+@import './styles/error-message.scss';
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600&subset=latin-ext');
 
-body {
+#root {
 	color: $black;
 	font-family: 'Work Sans', sans-serif;
 	letter-spacing: -0.2px;

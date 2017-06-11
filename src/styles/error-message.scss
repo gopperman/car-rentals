@@ -1,0 +1,32 @@
+@import './variables.scss';
+
+$module-name: 'error-message';
+
+.#{$module-name} {
+	border: 3px solid $red;
+	color: $gray;
+	max-width: 600px;
+	margin: 20px auto;
+	padding: 20px;
+
+	&__hed {
+		color: $red;
+		font-size: $font-lg;
+		margin: 0;
+		text-align: center;
+	}
+
+	&__list {
+		color: $red;
+
+		&-item {
+			margin: .5em 0;
+		}
+	}
+
+	&__foot {
+		color: $gray;
+		font-size: $font-sm;
+		text-align: center;
+	}
+}
