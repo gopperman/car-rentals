@@ -1,0 +1,14 @@
+$module-name: 'header';
+
+.#{$module-name} {
+	text-align: center;
+
+	&__lede {
+		font-size: $font-xl;
+		margin-bottom: 0;
+	}
+	&__subhed {
+		color: $gray;
+		font-size: $font-md;
+	}
+}
