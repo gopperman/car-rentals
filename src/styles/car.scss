@@ -20,7 +20,7 @@ $module-name: 'car';
 	}
 
 	&__links {}
-	
+
 	&__cta {
 		background: $green;
 		color: white;
@@ -34,8 +34,8 @@ $module-name: 'car';
 	}
 
 	&__flex {
-		display: flex;
    		width: 25%;
    		margin: 0 20px;
+   		flex-grow: 1 0 0 0;
 	}
 }

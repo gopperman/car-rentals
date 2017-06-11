@@ -11,11 +11,11 @@ class CarListing extends Component {
 				<div className="car__flex">
 					<img src={sedan} className="car__thumbnail" alt="This car is a placeholder" />
 				</div>
-				<div class="car__flex">
+				<div className="car__flex">
 					<h3>{car.CarTypeCode}</h3>
 					${car.DailyRate} per day
 				</div>
-				<div class="car__flex">
+				<div className="car__flex">
 					Subtotal: ${car.SubTotal}
 					Fees: ${car.TaxesandFees}
 					Total Price: ${car.TotalPrice}
