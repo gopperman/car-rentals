@@ -41,16 +41,13 @@ class App extends Component {
 			// #TECHDEBT: Under normal circumstances, this key shouldn't be 'public',
 			// but you could get it by watching your network tab anyway
 			requestUrl = `https://api.hotwire.com/v1/search/car?apikey=mbduyn72ef3zgfcm4wxrhu9y&format=json&${urlParams}`,
-			requestHeaders = new Headers(),
 			requestSettings = { 
-				method: 'GET',
-            	headers: requestHeaders,
             	mode: 'cors',
-            	cache: 'default',
             }
 
 			// #TODO: Fix CORS
 			fetch(requestUrl, requestSettings).then((response) => {
+				console.log(response)
 				return response.json()
 			})
 			.then((data) => {
@@ -114,29 +111,29 @@ class App extends Component {
 						I want to pick up my rental in 
 						<span className="search__input-wrapper">
 							<input className="search__text" type="text" id="dest" name="dest" defaultValue={query.dest} />
-							<label className="search__label" for="dest">Airport Code, e.g "BOS"</label>
+							<label className="search__label" htmlFor="dest">Airport Code, e.g "BOS"</label>
 						</span> 
 						on 
 						<span className="search__input-wrapper">
 							<input className="search__text" type="text" id="startdate" name="startdate" defaultValue={query.startdate} />
-							<label className="search__label" for="startdate">Pickup Date (mm/dd/yyyy)</label>
+							<label className="search__label" htmlFor="startdate">Pickup Date (mm/dd/yyyy)</label>
 						</span> 
 						at 
 						<span className="search__input-wrapper">
 							<input className="search__text" type="text" name="pickuptime" defaultValue={query.pickuptime} />
-							<label className="search__label" for="pickuptime">Pickup Time (24h format)</label>
+							<label className="search__label" htmlFor="pickuptime">Pickup Time (24h format)</label>
 						</span>
 					</p>
 					<p className="search__paragraph">
 						I want to return the car on 
 						<span className="search__input-wrapper">
 							<input type="text" name="enddate" defaultValue={query.enddate} />
-							<label className="search__label" for="enddate">Dropoff Date, (mm/dd/yyyy)</label>
+							<label className="search__label" htmlFor="enddate">Dropoff Date, (mm/dd/yyyy)</label>
 						</span>
 						at 
 						<span className="search__input-wrapper">
 							<input className="search__text" type="text" name="dropofftime" defaultValue={query.dropofftime} />
-							<label className="search__label" for="dropofftime">Dropoff Time (24h format)</label>
+							<label className="search__label" htmlFor="dropofftime">Dropoff Time (24h format)</label>
 						</span>
 					</p>
 					<button className="search__submit" onClick={this.search}>Search</button>
