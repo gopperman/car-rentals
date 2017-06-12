@@ -6,10 +6,7 @@ import {getErrors} from './util/dataUtil.js'
 import Header from './components/Header'
 import ErrorMessage from './components/ErrorMessage'
 import Results from './components/Results'
-
 import './App.css'
-
-import data from './data/sample-response.json'
 
 class App extends Component {
 	constructor() {
@@ -18,7 +15,6 @@ class App extends Component {
 		// Set initial state
 		// We don't use camelcase here to match the API format
 		this.state = { 
-			response: data, // 'Cached' API response
 			query: {
 				dest: 'BOS',
 				startdate: '01/20/2018',
@@ -27,8 +23,15 @@ class App extends Component {
 				dropofftime: '13:30'
 			}
     	}
+
+    	this.search = this.search.bind(this)
 	}
 
+	/**
+	 * Serializes form input and kicks off a request to Hotwire
+	 * @param  {object} event
+	 * @return {void}
+	 */
 	search(event) {
 		event.preventDefault();
 
@@ -36,20 +39,37 @@ class App extends Component {
 			query = serialize(form, { hash: true }),
 			urlParams = serialize(form),
 			// #TECHDEBT: Under normal circumstances, this key shouldn't be 'public',
-			// but you could guess it by watching your network tab anyway
-			requestUrl = `https://api.hotwire.com/v1/search/car?key=mbduyn72ef3zgfcm4wxrhu9y&format=json&${urlParams}`,
+			// but you could get it by watching your network tab anyway
+			requestUrl = `https://api.hotwire.com/v1/search/car?apikey=mbduyn72ef3zgfcm4wxrhu9y&format=json&${urlParams}`,
 			requestHeaders = new Headers(),
 			requestSettings = { 
 				method: 'GET',
             	headers: requestHeaders,
-            	mode: 'no-cors',
-            	cache: 'default' }
-			
-			fetch(requestUrl).then( (response) =>{
-				console.log(response)
+            	mode: 'cors',
+            	cache: 'default',
+            }
+
+			// #TODO: Fix CORS
+			fetch(requestUrl, requestSettings).then((response) => {
+				return response.json()
 			})
-			console.log(requestUrl)
+			.then((data) => {
+				this.setState({
+					response: data,
+					query: query
+				})
+			})
+			.catch((err) => {
+				// Let's trigger error rendering by fudging the state a little
+				console.log(err)
+				this.setState({
+					response: {
+						Errors: [err]
+					}
+				})
+			})
 	}
+
 	/**
 	 * Renders components conditionally based on the response body
 	 * 
@@ -57,20 +77,28 @@ class App extends Component {
 	 */
 	showResults() {
 		const errors = getErrors(this.state.response),
-			cars = _.get(this.state.response, 'Result', null)
+			cars = _.get(this.state.response, 'Result', false)
 
 		/**
-		 * If we have one or more errors, render error messaging.
-		 * Otherwise, show results!
+		 * If we have one or more errors, render error messages
+		 * @param  {int}
 		 */
-		return (errors.length > 0) ? 
-			<ErrorMessage errors={errors} /> 
-		:
-			<Results cars={cars} dest={this.state.query.dest} />
-
+		if(errors.length > 0) {
+			return <ErrorMessage errors={errors} /> 
+		} else {
+			/**
+			 * If response included cars, render the results
+			 * @param  {object}
+			 */
+			if (cars) {
+				return <Results cars={cars} dest={this.state.query.dest} />
+			}
+		}
+		return null
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
+		console.log(!_.isEqual(this.state, nextState))
 		return !_.isEqual(this.state, nextState)
 	}
 
