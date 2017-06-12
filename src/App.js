@@ -63,7 +63,11 @@ class App extends Component {
 				// Let's trigger error rendering by fudging the state a little
 				this.setState({
 					response: {
-						Errors: [{ErrorMessage: err.toString()}]
+						Errors: [
+							{
+								ErrorMessage: `${err.toString()}. Have you tried enabling CORS?`
+							}
+						]
 					}
 				})
 			})

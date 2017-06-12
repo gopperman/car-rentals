@@ -10,4 +10,19 @@ $module-name: 'results';
 	&__hed {
 		margin: 20px;
 	}
+
+	&__sort {
+		margin-left: 20px;
+		color: $gray;
+
+		&-link {
+			margin-left: 6px;
+			text-decoration: underline;
+
+			&:hover, &:active, &:focus {
+				cursor: hand;
+				cursor: pointer;
+			}
+		}
+	}
 }
