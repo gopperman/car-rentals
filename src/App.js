@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 // #TECHDEBT We should really just import the parts of lodash we need
 import _ from 'lodash'
+import fetchJsonp from 'fetch-jsonp'
 import serialize from 'form-serialize'
 import {getErrors, getCars} from './util/dataUtil.js'
 import Header from './components/Header'
@@ -40,13 +41,9 @@ class App extends Component {
 			urlParams = serialize(form),
 			// #TECHDEBT: Under normal circumstances, this key shouldn't be 'public',
 			// but you could get it by watching your network tab anyway
-			requestUrl = `https://api.hotwire.com/v1/search/car?apikey=mbduyn72ef3zgfcm4wxrhu9y&format=json&${urlParams}`,
-			requestSettings = { 
-            	mode: 'cors',
-            }
+			requestUrl = `https://api.hotwire.com/v1/search/car?apikey=mbduyn72ef3zgfcm4wxrhu9y&format=jsonp&${urlParams}`
 
-			// #TODO: Fix CORS
-			fetch(requestUrl, requestSettings).then((response) => {
+			fetchJsonp(requestUrl).then((response) => {
 				return response.json()
 			})
 			.then((data) => {
@@ -61,7 +58,7 @@ class App extends Component {
 					response: {
 						Errors: [
 							{
-								ErrorMessage: `${err.toString()}. Have you tried enabling CORS?`
+								ErrorMessage: `${err.toString()}`
 							}
 						]
 					}
