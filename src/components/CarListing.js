@@ -25,6 +25,7 @@ class CarListing extends Component {
 
 	render() {
 		const {car} = this.props
+		console.log(car)
 
 	    return (
 			<div className="car">
@@ -33,7 +34,9 @@ class CarListing extends Component {
 						<img src={sedan} className="car__thumbnail" alt="This car is a placeholder" />
 					</div>
 					<div className="car__flex">
-						<h3 className="car__type">{car.CarTypeCode}</h3>
+						<h3 className="car__type">{car.CarTypeName}</h3>
+						<p className="car__possible">{car.PossibleModels}</p>
+						<p className="car__seating">Seats {car.TypicalSeating}</p>
 						<p className="car__rate">${car.DailyRate} per day</p>
 					</div>
 					<div className="car__pricing car__flex">
@@ -51,9 +54,10 @@ class CarListing extends Component {
 					More Information
 				</button>
 				<div className="car__more">
+					<p><b>Possible Features:</b> {car.PossibleFeatures}</p>
+					<p><b>Mileage:</b> {car.MileageDescription}</p>
 					<p><b>Pick-up:</b> {car.PickupDay}, {car.PickupTime}</p>
 					<p><b>Drop-off:</b> {car.DropoffDay}, {car.DropoffTime}</p>
-					<p><b>Mileage:</b> {car.MileageDescription}</p>
 					<p><b>Vendor Location:</b> {car.VendorLocationId}</p>
 					<p><b>Location Description:</b> {car.LocationDescription}</p>
 				</div>

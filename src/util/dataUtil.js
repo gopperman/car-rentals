@@ -37,7 +37,7 @@ const getCars = (response) => {
 	// For each car, we're going to map the car type code to an entry in the car
 	// metadata array, then return a new object with a join of the two
 	if (cars) {
-		console.log(cars.map(car => {
+		return cars.map(car => {
 			const carType = _.find(meta, (type) =>
 				car.CarTypeCode === type.CarTypeCode
 			)
@@ -46,7 +46,8 @@ const getCars = (response) => {
 				...carType
 			}
 
-		}))
+		})
+
 	}
 	return false
 }

@@ -66,7 +66,7 @@ class Results extends Component {
 	      	<p className="results__sort">
 	      		Sort by: 
 	      		<a className="results__sort-link" data-sortKey="totalPrice" onClick={this.sort}>Price</a>,
-	      		<a className="results__sort-link" data-sortKey="CarTypeCode" onClick={this.sort}>Car Type</a>
+	      		<a className="results__sort-link" data-sortKey="CarTypeName" onClick={this.sort}>Car Type</a>
 	      	</p>
 	      	{this.carList()}
 	      </div>
