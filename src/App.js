@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 // #TECHDEBT We should really just import the parts of lodash we need
 import _ from 'lodash'
 import serialize from 'form-serialize'
-import {getErrors} from './util/dataUtil.js'
+import {getErrors, getCars} from './util/dataUtil.js'
 import Header from './components/Header'
 import ErrorMessage from './components/ErrorMessage'
 import Results from './components/Results'
@@ -80,13 +80,12 @@ class App extends Component {
 	 */
 	showResults() {
 		const errors = getErrors(this.state.response),
-			cars = _.get(this.state.response, 'Result', false)
-
+			cars = getCars(this.state.response)
 		/**
 		 * If we have one or more errors, render error messages
 		 * @param  {int}
 		 */
-		if(errors.length > 0) {
+		if (errors.length > 0) {
 			return <ErrorMessage errors={errors} /> 
 		} else {
 			/**

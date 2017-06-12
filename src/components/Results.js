@@ -31,6 +31,11 @@ class Results extends Component {
 		})
 	}
 
+	/**
+	 * Sorts list of cars based on state
+	 * @param  {object} event
+	 * @return {void}
+	 */
 	sort(event) {
 		event.preventDefault()
 		this.setState({
@@ -47,7 +52,7 @@ class Results extends Component {
 
 		return (cars.length > 0) ?
 			`Great news! We found you ${cars.length} cars near ${dest}` :
-			`Sorry, we couldn't find any cards that match your needs. Try changing your search parameters and try again.`
+			`Sorry, we couldn't find any cars that match your needs. Try changing your search parameters and try again.`
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
@@ -73,4 +78,5 @@ Results.propTypes = {
 	cars: PropTypes.array.isRequired,
 	dest: PropTypes.string.isRequired,
 }
+
 export default Results

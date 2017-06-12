@@ -26,4 +26,29 @@ const getErrors = (response) => {
 	return (Array.isArray(errors)) ? errors : [_.get(errors, 'Error', null)]
 }
 
-export { getErrors }
+/**
+ * Parses response for car data needed to render results component
+ * @param  {object} the API response
+ * @return {array} An array of cars (or false)
+ */
+const getCars = (response) => {
+	const cars = _.get(response, 'Result', false)
+	const meta = _.get(response, 'MetaData.CarMetaData.CarTypes', [])
+	// For each car, we're going to map the car type code to an entry in the car
+	// metadata array, then return a new object with a join of the two
+	if (cars) {
+		console.log(cars.map(car => {
+			const carType = _.find(meta, (type) =>
+				car.CarTypeCode === type.CarTypeCode
+			)
+			return {
+				...car,
+				...carType
+			}
+
+		}))
+	}
+	return false
+}
+
+export { getErrors, getCars }
