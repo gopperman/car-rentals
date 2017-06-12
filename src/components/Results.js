@@ -52,11 +52,11 @@ class Results extends Component {
 
 		return (cars.length > 0) ?
 			`Great news! We found you ${cars.length} cars near ${dest}` :
-			`Sorry, we couldn't find any cars that match your needs. Try changing your search parameters and try again.`
+			`Sorry, we couldn't find any cars that meet your needs. Try changing your search parameters and try again.`
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
-		return this.state.sortKey !== nextState.sortKey
+		return (this.state.sortKey !== nextState.sortKey || !_.isEqual(this.props, nextProps))
 	}
 
 	render() {

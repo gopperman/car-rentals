@@ -29,25 +29,31 @@ const getErrors = (response) => {
 /**
  * Parses response for car data needed to render results component
  * @param  {object} the API response
- * @return {array} An array of cars (or false)
+ * @return {array} An array of cars, or false
  */
 const getCars = (response) => {
 	const cars = _.get(response, 'Result', false)
 	const meta = _.get(response, 'MetaData.CarMetaData.CarTypes', [])
-	// For each car, we're going to map the car type code to an entry in the car
-	// metadata array, then return a new object with a join of the two
-	if (cars) {
-		return cars.map(car => {
-			const carType = _.find(meta, (type) =>
-				car.CarTypeCode === type.CarTypeCode
-			)
-			return {
-				...car,
-				...carType
-			}
+	const StatusCode = _.get(response, 'StatusCode', false)
 
-		})
+	// The API returns 100 when "no results were found"
+	if ( StatusCode === '100') {
+		return []
+	} else {
+		// For each car, we're going to map the car type code to an entry in the car
+		// metadata array, then return a new object with a join of the two
+		if (cars) {
+			return cars.map(car => {
+				const carType = _.find(meta, (type) =>
+					car.CarTypeCode === type.CarTypeCode
+				)
+				return {
+					...car,
+					...carType
+				}
 
+			})
+		}
 	}
 	return false
 }
