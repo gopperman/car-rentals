@@ -41,19 +41,10 @@ $module-name: 'car';
 	}
 
 	&__cta {
-		background: $green;
-		border-radius: 4px;
-		color: white;
-		font-size: $font-md;
+		@include button-style();
+
 		display: inline-block;
 		margin-bottom: 2em;
-		padding: 8px 24px;
-		text-align: center;
-		text-decoration: none;
-		transition: background, .2s;
-		&:active, &:hover, &:focus {
-			background: lighten($green, 10%);
-		}
 	}
 
 	&__more {

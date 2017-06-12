@@ -15,12 +15,24 @@ class Results extends Component {
 		})
 	}
 
+	/**
+	 * Checks length of results and returns appropriate micro-copy
+	 * @return {string} the hed
+	 */
+	resultsHed() {
+		const {cars, dest} = this.props;
+
+		return (cars.length > 0) ?
+			`Great news! We found you ${cars.length} cars near ${dest}` :
+			`Sorry, we couldn't find any cards that match your needs. Try changing your search parameters and try again.`
+	}
+
 	render() {
 		const {cars, dest} = this.props
 
 	    return (
-	      <div className="results">
-	      	<h2 className="results__hed">Great news! We found you {cars.length} cars near {dest}:</h2>
+	      <div id="results" className="results">
+	      	<h2 className="results__hed">{this.resultsHed()}</h2>
 	      	{this.carList()}
 	      </div>
 	    )

@@ -19,3 +19,23 @@ $font-lg: 1.6em;
 $font-xl: 2.4em;
 $font-xxl: 3.6em;
 
+//*********************************
+// Mixins
+//*********************************
+@mixin button-style() {
+	background: $green;
+	border-radius: 4px;
+	border: 0;
+	color: white;
+	font-size: $font-md;
+	padding: 8px 24px;
+	text-align: center;
+	text-decoration: none;
+	transition: background, .2s;
+
+	&:active, &:hover, &:focus {
+		background: lighten($green, 10%);
+		cursor: hand;
+		cursor: pointer;
+	}
+}

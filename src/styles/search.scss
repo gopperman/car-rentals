@@ -1,0 +1,16 @@
+@import './variables.scss';
+
+$module-name: 'search';
+
+.#{$module-name} {
+	margin: 50px auto 75px;
+	max-width: 800px;
+	font-size: $font-md;
+
+	&__submit {
+		@include button-style();
+
+		display: block;
+		margin: 0 auto;
+	}
+}

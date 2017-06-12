@@ -26,14 +26,20 @@ class App extends Component {
 			}
     	}
 	}
+
+	search(event) {
+		event.preventDefault();
+		console.log('yo');
+	}
 	/**
 	 * Renders components conditionally based on the response body
 	 * 
 	 * @return {Component} the component(s) to render
 	 */
 	showResults() {
-		const errors = getErrors(this.state.response)
-		const cars = _.get(this.state.response, 'Result', null)
+		const errors = getErrors(this.state.response),
+			cars = _.get(this.state.response, 'Result', null)
+
 		/**
 		 * If we have one or more errors, render error messaging.
 		 * Otherwise, show results!
@@ -46,9 +52,23 @@ class App extends Component {
 	}
 
 	render() {
+		const {query} = this.state
+		// TODO: Move search form to its own component, manage state with pub/sub
 		return (
 			<main className="App">
 				<Header />
+				<form className="search">
+					<p>
+						I'm looking to pick up my rental in <input type="text" name="dest" defaultValue={query.dest} /> 
+						on <input className="search__text" type="text" name="startDate" defaultValue={query.startDate} /> 
+						at <input className="search__text" type="text" name="pickupTime" defaultValue={query.pickupTime} />
+					</p>
+					<p>
+						I want to return the car on <input type="text" name="endDate" defaultValue={query.endDate} /> 
+						at <input className="search__text" type="text" name="dropoffTime" defaultValue={query.dropoffTime} />
+					</p>
+					<button className="search__submit" onClick={this.search}>Search</button>
+				</form>
 				{this.showResults()}
 			</main>
 		)
