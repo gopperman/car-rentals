@@ -28,8 +28,6 @@ class Results extends Component {
 	}
 
 	render() {
-		const {cars, dest} = this.props
-
 	    return (
 	      <div id="results" className="results">
 	      	<h2 className="results__hed">{this.resultsHed()}</h2>

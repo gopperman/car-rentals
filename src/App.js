@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import _ from 'lodash'
-import {getErrors} from './util/dataUtil.js'
 // #TECHDEBT We should really just import the parts of lodash we need
+import _ from 'lodash'
+import serialize from 'form-serialize'
+import {getErrors} from './util/dataUtil.js'
 import Header from './components/Header'
 import ErrorMessage from './components/ErrorMessage'
 import Results from './components/Results'
@@ -15,21 +16,39 @@ class App extends Component {
 		super()
 
 		// Set initial state
+		// We don't use camelcase here to match the API format
 		this.state = { 
 			response: data, // 'Cached' API response
 			query: {
 				dest: 'BOS',
-				startDate: '01/20/2018',
-				endDate: '01/23/2018',
-				pickupTime: '10:00',
-				dropoffTime: '13:30'
+				startdate: '01/20/2018',
+				enddate: '01/23/2018',
+				pickuptime: '10:00',
+				dropofftime: '13:30'
 			}
     	}
 	}
 
 	search(event) {
 		event.preventDefault();
-		console.log('yo');
+
+		const form = document.querySelector('.search'),
+			query = serialize(form, { hash: true }),
+			urlParams = serialize(form),
+			// #TECHDEBT: Under normal circumstances, this key shouldn't be 'public',
+			// but you could guess it by watching your network tab anyway
+			requestUrl = `http://api.hotwire.com/v1/search/car?key=mbduyn72ef3zgfcm4wxrhu9y&format=json&${urlParams}`,
+			requestHeaders = new Headers(),
+			requestSettings = { 
+				method: 'GET',
+            	headers: requestHeaders,
+            	mode: 'no-cors',
+            	cache: 'default' }
+			
+			fetch(requestUrl).then( (response) =>{
+				console.log(response)
+			})
+			console.log(requestUrl)
 	}
 	/**
 	 * Renders components conditionally based on the response body
@@ -51,6 +70,10 @@ class App extends Component {
 
 	}
 
+	shouldComponentUpdate(nextProps, nextState) {
+		return !_.isEqual(this.state, nextState)
+	}
+
 	render() {
 		const {query} = this.state
 		// TODO: Move search form to its own component, manage state with pub/sub
@@ -60,12 +83,12 @@ class App extends Component {
 				<form className="search">
 					<p>
 						I'm looking to pick up my rental in <input type="text" name="dest" defaultValue={query.dest} /> 
-						on <input className="search__text" type="text" name="startDate" defaultValue={query.startDate} /> 
-						at <input className="search__text" type="text" name="pickupTime" defaultValue={query.pickupTime} />
+						on <input className="search__text" type="text" name="startdate" defaultValue={query.startdate} /> 
+						at <input className="search__text" type="text" name="pickuptime" defaultValue={query.pickuptime} />
 					</p>
 					<p>
-						I want to return the car on <input type="text" name="endDate" defaultValue={query.endDate} /> 
-						at <input className="search__text" type="text" name="dropoffTime" defaultValue={query.dropoffTime} />
+						I want to return the car on <input type="text" name="enddate" defaultValue={query.enddate} /> 
+						at <input className="search__text" type="text" name="dropofftime" defaultValue={query.dropofftime} />
 					</p>
 					<button className="search__submit" onClick={this.search}>Search</button>
 				</form>
