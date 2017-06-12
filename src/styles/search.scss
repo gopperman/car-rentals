@@ -7,6 +7,27 @@ $module-name: 'search';
 	max-width: 800px;
 	font-size: $font-md;
 
+	&__paragraph {
+		line-height: 2em;
+	}
+
+	&__input-wrapper {
+		position: relative;
+		margin: 0 10px;
+	}
+
+	&__label {
+		color: $gray;
+		display: block;
+		position: absolute;
+		left: 0;
+		bottom: -1.2em;
+		font-size: $font-xs;
+		line-height: 1em;
+		// This is a hack, but the labels 
+		// should be able to extend past the width of the input
+		width: 120%;
+	}
 	&__submit {
 		@include button-style();
 

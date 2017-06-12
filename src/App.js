@@ -110,14 +110,34 @@ class App extends Component {
 			<main className="App">
 				<Header />
 				<form className="search">
-					<p>
-						I'm looking to pick up my rental in <input type="text" name="dest" defaultValue={query.dest} /> 
-						on <input className="search__text" type="text" name="startdate" defaultValue={query.startdate} /> 
-						at <input className="search__text" type="text" name="pickuptime" defaultValue={query.pickuptime} />
+					<p className="search__paragraph">
+						I want to pick up my rental in 
+						<span className="search__input-wrapper">
+							<input className="search__text" type="text" id="dest" name="dest" defaultValue={query.dest} />
+							<label className="search__label" for="dest">Airport Code, e.g "BOS"</label>
+						</span> 
+						on 
+						<span className="search__input-wrapper">
+							<input className="search__text" type="text" id="startdate" name="startdate" defaultValue={query.startdate} />
+							<label className="search__label" for="startdate">Pickup Date (mm/dd/yyyy)</label>
+						</span> 
+						at 
+						<span className="search__input-wrapper">
+							<input className="search__text" type="text" name="pickuptime" defaultValue={query.pickuptime} />
+							<label className="search__label" for="pickuptime">Pickup Time (24h format)</label>
+						</span>
 					</p>
-					<p>
-						I want to return the car on <input type="text" name="enddate" defaultValue={query.enddate} /> 
-						at <input className="search__text" type="text" name="dropofftime" defaultValue={query.dropofftime} />
+					<p className="search__paragraph">
+						I want to return the car on 
+						<span className="search__input-wrapper">
+							<input type="text" name="enddate" defaultValue={query.enddate} />
+							<label className="search__label" for="enddate">Dropoff Date, (mm/dd/yyyy)</label>
+						</span>
+						at 
+						<span className="search__input-wrapper">
+							<input className="search__text" type="text" name="dropofftime" defaultValue={query.dropofftime} />
+							<label className="search__label" for="dropofftime">Dropoff Time (24h format)</label>
+						</span>
 					</p>
 					<button className="search__submit" onClick={this.search}>Search</button>
 				</form>
