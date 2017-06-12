@@ -61,10 +61,9 @@ class App extends Component {
 			})
 			.catch((err) => {
 				// Let's trigger error rendering by fudging the state a little
-				console.log(err)
 				this.setState({
 					response: {
-						Errors: [err]
+						Errors: [{ErrorMessage: err.toString()}]
 					}
 				})
 			})
@@ -98,7 +97,6 @@ class App extends Component {
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
-		console.log(!_.isEqual(this.state, nextState))
 		return !_.isEqual(this.state, nextState)
 	}
 

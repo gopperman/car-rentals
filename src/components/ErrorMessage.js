@@ -10,7 +10,6 @@ class ErrorMessage extends Component {
 		return errors
 	}
 	render() {
-		console.log(this.props)
 		return (
 			<div className="error-message">
 				<p className="error-message__hed">Oops! Something went wrong.</p>
