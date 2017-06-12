@@ -47,7 +47,6 @@ class App extends Component {
 
 			// #TODO: Fix CORS
 			fetch(requestUrl, requestSettings).then((response) => {
-				console.log(response)
 				return response.json()
 			})
 			.then((data) => {
