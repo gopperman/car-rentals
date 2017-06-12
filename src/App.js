@@ -37,7 +37,7 @@ class App extends Component {
 			urlParams = serialize(form),
 			// #TECHDEBT: Under normal circumstances, this key shouldn't be 'public',
 			// but you could guess it by watching your network tab anyway
-			requestUrl = `http://api.hotwire.com/v1/search/car?key=mbduyn72ef3zgfcm4wxrhu9y&format=json&${urlParams}`,
+			requestUrl = `https://api.hotwire.com/v1/search/car?key=mbduyn72ef3zgfcm4wxrhu9y&format=json&${urlParams}`,
 			requestHeaders = new Headers(),
 			requestSettings = { 
 				method: 'GET',
