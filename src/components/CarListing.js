@@ -25,8 +25,7 @@ class CarListing extends Component {
 
 	render() {
 		const {car} = this.props
-		console.log(car)
-
+		
 	    return (
 			<div className="car">
 				<div className="car__flex-container">
